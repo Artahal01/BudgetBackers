@@ -11,6 +11,4 @@ public interface DeviseDAOInterface {
     List<Devises> getAll() throws SQLException;
 
     void update(Devises toUpdate) throws SQLException;
-
-    void delete(int id) throws SQLException;
 }

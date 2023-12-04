@@ -27,7 +27,7 @@ public class TransactionsDAO implements TransactionDAOInterface {
         String sql = "INSERT INTO transactions (transaction_id, status, compte_id) VALUES (?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, transaction.getTransationId());
+            preparedStatement.setInt(1, transaction.getTransactionId());
             preparedStatement.setBoolean(2, transaction.getStatus());
             preparedStatement.setInt(3, transaction.getCompteId());
 
@@ -62,21 +62,8 @@ public class TransactionsDAO implements TransactionDAOInterface {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setBoolean(1, transaction.getStatus());
-            preparedStatement.setInt(2, transaction.getTransationId());
+            preparedStatement.setInt(2, transaction.getTransactionId());
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // DELETE TRANSACTIONS
-    @Override
-    public void delete(int id) throws SQLException {
-        String sql = "DELETE FROM transactions WHERE transaction_id = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

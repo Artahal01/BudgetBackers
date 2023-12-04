@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 
 public class Transactions {
-    private int transationId;
+    private int transactionId;
     private Boolean status;
     private int compteId;
 }

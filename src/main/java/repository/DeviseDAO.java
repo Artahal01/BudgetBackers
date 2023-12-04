@@ -68,20 +68,6 @@ public class DeviseDAO implements DeviseDAOInterface {
              e.printStackTrace();
          }
      }
- 
-     // DELETE DEVISES
-     @Override
-     public void delete(int id) throws SQLException {
-         String sql = "DELETE FROM devises WHERE devise_id = ?";
- 
-         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-             preparedStatement.setInt(1, id);
-             preparedStatement.executeUpdate();
-         } catch (SQLException e) {
-             e.printStackTrace();
-         }
-     }
- 
      // Helper method to convert ResultSet to List<Devises>
     private void convertToDevisesList(List<Devises> Devises, ResultSet result) throws SQLException {
         Devises.add(new Devises(

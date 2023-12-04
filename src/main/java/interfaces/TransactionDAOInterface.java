@@ -11,6 +11,4 @@ public interface TransactionDAOInterface {
     List<Transactions> getAll() throws SQLException;
 
     void update(Transactions toUpdate) throws SQLException;
-
-    void delete(int id) throws SQLException;
 }
