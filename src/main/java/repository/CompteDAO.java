@@ -23,7 +23,7 @@ public class CompteDAO implements CompteDAOInterface {
     // INSERT INTO COMPTES
     @Override
     public void insert(Compte toInsert) throws SQLException{
-        String sql = "INSERT INTO comptes (compte_id, first_name, second_name, age, creation_date, email, password ,deviseId) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO comptes (compte_id, first_name, second_name, age, creation_date, email, password ,devise_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, toInsert.getCompteId());
