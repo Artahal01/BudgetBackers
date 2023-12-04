@@ -1,12 +1,12 @@
 -- Table des devises
-CREATE TABLE devises (
+CREATE TABLE IF NOT EXISTS devises (
     devise_id int PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     code VARCHAR(3) NOT NULL
 );
 
 -- Table des comptes
-CREATE TABLE comptes (
+CREATE TABLE IF NOT EXISTS comptes (
     compte_id int PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     second_name VARCHAR(255) NOT NULL,
@@ -14,11 +14,11 @@ CREATE TABLE comptes (
     creation_date DATE NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    devise_id INT REFERENCES devises(devise_id) 
+    devise_id INT REFERENCES devises(devise_id)
 );
 
 -- Table des transactions
-CREATE TABLE transactions (
+CREATE TABLE IF NOT EXISTS transactions (
     transation_id int PRIMARY KEY,
     status BOOLEAN NOT NULL,
     compte_id INT REFERENCES comptes(compte_id)
