@@ -14,6 +14,8 @@ import lombok.ToString;
 @ToString
 
 public class Compte {
+    public Compte(int int1, String string, String string2, String string3, Date date, String string4, String string5) {
+    }
     private int compteId;
     private String firstName;
     private String secondName;
@@ -21,4 +23,5 @@ public class Compte {
     private Date creationDate;
     private String email;
     private String password;
+    private int deviseId;
 }
