@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: Exemple API
+  version: 1.0.0
+paths:
+  /comptes:
+    get:
+      summary: Récupérer la liste des comptes avec les devises et transactions associées
+      description: Renvoie la liste complète des comptes avec les devises et transactions associées.
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompteWithDetails'
+    post:
+      summary: Créer un nouveau compte
+      description: Crée un nouveau compte avec les données fournies.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Compte'
+      responses:
+        '200':
+          description: Compte créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Compte'
+
+  /comptes/{compteId}:
+    get:
+      summary: Récupérer un compte avec les devises et transactions associées
+      description: Renvoie un compte spécifique avec les devises et transactions associées.
+      parameters:
+        - name: compteId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompteWithDetails'
+    put:
+      summary: Mettre à jour un compte existant
+      description: Met à jour les données d'un compte existant avec les données fournies.
+      parameters:
+        - name: compteId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Compte'
+      responses:
+        '200':
+          description: Compte mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Compte'
+
+  /devises:
+    get:
+      summary: Récupérer la liste des devises
+      description: Renvoie la liste complète des devises.
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Devises'
+    post:
+      summary: Créer une nouvelle devise
+      description: Crée une nouvelle devise avec les données fournies.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Devises'
+      responses:
+        '200':
+          description: Devise créée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Devises'
+
+  /transactions:
+    get:
+      summary: Récupérer la liste des transactions
+      description: Renvoie la liste complète des transactions.
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transactions'
+    post:
+      summary: Créer une nouvelle transaction
+      description: Crée une nouvelle transaction avec les données fournies.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transactions'
+      responses:
+        '200':
+          description: Transaction créée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+                
+components:
+  schemas:
+    Compte:
+      type: object
+      properties:
+        compteId:
+          type: integer
+        firstName:
+          type: string
+        secondName:
+          type: string
+        age:
+          type: integer
+        creationDate:
+          type: string
+          format: date-time
+        email:
+          type: string
+        password:
+          type: string
+
+    CompteWithDetails:
+      allOf:
+        - $ref: '#/components/schemas/Compte'
+        - type: object
+          properties:
+            devises:
+              type: array
+              items:
+                $ref: '#/components/schemas/Devises'
+            transactions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transactions'
+
+    Devises:
+      type: object
+      properties:
+        deviseId:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+
+    Transactions:
+      type: object
+      properties:
+        transationId:
+          type: integer
+        status:
+          type: boolean
+        compteId:
+          type: integer
