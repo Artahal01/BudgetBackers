@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Timestamp;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -14,6 +16,8 @@ import lombok.ToString;
 
 public class Transactions {
     private int transactionId;
-    private Boolean status;
-    private int compteId;
+    private String label;
+    private Double montant;
+    private Timestamp tempsDuTransaction;
+    private String typeDeLaTransaction;
 }

@@ -14,6 +14,6 @@ import lombok.ToString;
 
 public class Devises {
     private int deviseId;
-    private String name;
+    private String nom;
     private String code;
 }
