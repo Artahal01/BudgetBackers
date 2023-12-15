@@ -20,4 +20,5 @@ public class Transactions {
     private Double montant;
     private Timestamp tempsDuTransaction;
     private String typeDeLaTransaction;
+    private Compte compte;
 }

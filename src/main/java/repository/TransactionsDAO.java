@@ -24,12 +24,14 @@ public class TransactionsDAO implements TransactionDAOInterface {
     // INSERT INTO TRANSACTIONS
     @Override
     public void insert(Transactions transaction) throws SQLException {
-        String sql = "INSERT INTO transactions (transaction_id, status, compte_id) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO transactions (transaction_id, label, compte_id) VALUES (?, ?, ?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, transaction.getTransactionId());
-            preparedStatement.setBoolean(2, transaction.getStatus());
-            preparedStatement.setInt(3, transaction.getCompteId());
+            preparedStatement.setString(2, transaction.getLabel());
+            preparedStatement.setDouble(3, transaction.getMontant());
+            preparedStatement.setTimestamp(3, transaction.getTempsDuTransaction());
+            preparedStatement.setString(3, transaction.getTypeDeLaTransaction());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
