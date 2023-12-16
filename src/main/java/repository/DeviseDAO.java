@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public class DeviseDAO implements DeviseDAOInterface {
-    private Connection connection;
+    private final Connection connection;
 
     public DeviseDAO(Connection connection) {
         this.connection = connection;
@@ -22,11 +22,11 @@ public class DeviseDAO implements DeviseDAOInterface {
      // INSERT INTO DEVISES
      @Override
      public void insert(Devises devise) throws SQLException {
-         String sql = "INSERT INTO devises (devise_id, name, code) VALUES (?, ?, ?);";
+         String sql = "INSERT INTO devises (devise_id, nom, code) VALUES (?, ?, ?);";
  
          try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
              preparedStatement.setInt(1, devise.getDeviseId());
-             preparedStatement.setString(2, devise.getName());
+             preparedStatement.setString(2, devise.getNom());
              preparedStatement.setString(3, devise.getCode());
  
              preparedStatement.executeUpdate();
@@ -37,7 +37,7 @@ public class DeviseDAO implements DeviseDAOInterface {
  
      // GET ALL DEVISES
      @Override
-     public List<Devises> getAll() throws SQLException {
+     public List<Devises> getAll() {
          List<Devises> allDevises = new ArrayList<>();
          String sql = "SELECT * FROM devises";
  
@@ -59,9 +59,10 @@ public class DeviseDAO implements DeviseDAOInterface {
          String sql = "UPDATE devises SET name = ?, code = ? WHERE devise_id = ?;";
  
          try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-             preparedStatement.setString(1, devise.getName());
-             preparedStatement.setString(2, devise.getCode());
              preparedStatement.setInt(3, devise.getDeviseId());
+             preparedStatement.setString(1, devise.getNom());
+             preparedStatement.setString(2, devise.getCode());
+
  
              preparedStatement.executeUpdate();
          } catch (SQLException e) {

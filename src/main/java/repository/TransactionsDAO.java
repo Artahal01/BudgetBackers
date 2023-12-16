@@ -1,5 +1,7 @@
 package repository;
 
+import model.Compte;
+import model.Devises;
 import org.springframework.stereotype.Repository;
 
 import interfaces.TransactionDAOInterface;
@@ -15,7 +17,7 @@ import java.util.List;
 @Repository
 public class TransactionsDAO implements TransactionDAOInterface {
 
-    private Connection connection;
+    private final Connection connection;
 
     public TransactionsDAO(Connection connection) {
         this.connection = connection;
@@ -24,14 +26,15 @@ public class TransactionsDAO implements TransactionDAOInterface {
     // INSERT INTO TRANSACTIONS
     @Override
     public void insert(Transactions transaction) throws SQLException {
-        String sql = "INSERT INTO transactions (transaction_id, label, compte_id) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO transactions (transaction_id, label, montant, date, type, compte_id) VALUES (?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, transaction.getTransactionId());
             preparedStatement.setString(2, transaction.getLabel());
             preparedStatement.setDouble(3, transaction.getMontant());
-            preparedStatement.setTimestamp(3, transaction.getTempsDuTransaction());
-            preparedStatement.setString(3, transaction.getTypeDeLaTransaction());
+            preparedStatement.setTimestamp(4, transaction.getTempsDuTransaction());
+            preparedStatement.setString(5, transaction.getTypeDeLaTransaction());
+            preparedStatement.setInt(6,transaction.getCompte().getCompteId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -41,45 +44,58 @@ public class TransactionsDAO implements TransactionDAOInterface {
 
     // GET ALL TRANSACTIONS
     @Override
-    public List<Transactions> getAll() throws SQLException {
-        List<Transactions> allTransactions = new ArrayList<>();
-        String sql = "SELECT * FROM transactions";
+    public List<Transactions> getAll() {
+        List<Transactions> Transactions = new ArrayList<>();
+        String sql = "SELECT t.*, c.*, d.* FROM transaction t JOIN compte c ON t.compte_id = c.compte_id JOIN devises d ON c.devise_id = d.devise_id;";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                convertToTransactionsList(allTransactions, result);
+                Transactions transaction = new Transactions(
+                        result.getInt("transaction_id"),
+                        result.getString("label"),
+                        result.getDouble("montant"),
+                        result.getTimestamp("transaction_date"),
+                        result.getString("transaction_type"),
+                        new Compte(
+                                result.getInt("compte_id"),
+                                result.getString("nom"),
+                                result.getDouble("solde"),
+                                result.getString("type"),
+                                new Devises(
+                                        result.getInt("devise_id"),
+                                        result.getString("nom_devise"),
+                                        result.getString("code_devise")
+                                )
+                        )
+                );
+                Transactions.add(transaction);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return allTransactions;
+        return Transactions;
     }
 
     // UPDATE TRANSACTIONS
     @Override
     public void update(Transactions transaction) throws SQLException {
-        String sql = "UPDATE transactions SET status = ? WHERE transaction_id = ?;";
+        String sql = "UPDATE transactions SET label = ?, montant = ?, date = ?, Type = ?, compte_id = ? WHERE transaction_id = ?;";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setBoolean(1, transaction.getStatus());
-            preparedStatement.setInt(2, transaction.getTransactionId());
+            preparedStatement.setInt(6, transaction.getTransactionId());
+            preparedStatement.setString(1, transaction.getLabel());
+            preparedStatement.setDouble(2, transaction.getMontant());
+            preparedStatement.setTimestamp(3, transaction.getTempsDuTransaction());
+            preparedStatement.setString(4, transaction.getTypeDeLaTransaction());
+            preparedStatement.setInt(2, transaction.getCompte().getCompteId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    // Helper method to convert ResultSet to List<Transactions>
-    private void convertToTransactionsList(List<Transactions> transactions, ResultSet result) throws SQLException {
-        transactions.add(new Transactions(
-            result.getInt("transactionId"),
-            result.getBoolean("status"),
-            result.getInt("compteId")));
-}
-
 }
 
 
