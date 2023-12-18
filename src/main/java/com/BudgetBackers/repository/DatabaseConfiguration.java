@@ -1,4 +1,4 @@
-package repository;
+package com.BudgetBackers.repository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

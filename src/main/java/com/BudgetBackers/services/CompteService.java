@@ -1,8 +1,8 @@
-package services;
+package com.BudgetBackers.services;
 import org.springframework.stereotype.Service;
 
-import model.Compte;
-import repository.CompteDAO;
+import com.BudgetBackers.model.Compte;
+import com.BudgetBackers.repository.CompteDAO;
 
 import java.sql.SQLException;
 import java.util.List;

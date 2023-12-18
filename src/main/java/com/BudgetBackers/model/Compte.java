@@ -1,7 +1,4 @@
-package model;
-
-import java.sql.Date;
-import java.util.List;
+package com.BudgetBackers.model;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

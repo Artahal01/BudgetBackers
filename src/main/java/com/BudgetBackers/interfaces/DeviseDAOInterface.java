@@ -1,9 +1,9 @@
-package interfaces;
+package com.BudgetBackers.interfaces;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Devises;
+import com.BudgetBackers.model.Devises;
 
 public interface DeviseDAOInterface {
     void insert(Devises toInsert) throws SQLException;

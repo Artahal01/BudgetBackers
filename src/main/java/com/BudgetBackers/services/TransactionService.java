@@ -1,8 +1,8 @@
-package services;
+package com.BudgetBackers.services;
 import org.springframework.stereotype.Service;
 
-import model.Transactions;
-import repository.TransactionsDAO;
+import com.BudgetBackers.model.Transactions;
+import com.BudgetBackers.repository.TransactionsDAO;
 
 import java.sql.SQLException;
 import java.util.List;

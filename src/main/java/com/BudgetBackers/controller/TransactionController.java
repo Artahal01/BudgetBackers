@@ -1,6 +1,6 @@
-package controller;
-import model.Transactions;
-import services.TransactionService;
+package com.BudgetBackers.controller;
+import com.BudgetBackers.model.Transactions;
+import com.BudgetBackers.services.TransactionService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

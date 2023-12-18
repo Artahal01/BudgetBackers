@@ -1,4 +1,4 @@
-package model;
+package com.BudgetBackers.model;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

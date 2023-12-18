@@ -1,8 +1,8 @@
-package interfaces;
+package com.BudgetBackers.interfaces;
 
 import java.sql.SQLException;
 import java.util.List;
-import model.Compte;
+import com.BudgetBackers.model.Compte;
 
 public interface CompteDAOInterface {
     void insert(Compte toInsert) throws SQLException;

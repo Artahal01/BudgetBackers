@@ -1,10 +1,10 @@
-package repository;
+package com.BudgetBackers.repository;
 
-import model.Devises;
+import com.BudgetBackers.model.Devises;
 import org.springframework.stereotype.Repository;
 
-import interfaces.CompteDAOInterface;
-import model.Compte;
+import com.BudgetBackers.interfaces.CompteDAOInterface;
+import com.BudgetBackers.model.Compte;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

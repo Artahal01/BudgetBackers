@@ -1,9 +1,9 @@
-package repository;
+package com.BudgetBackers.repository;
 
 import org.springframework.stereotype.Repository;
 
-import interfaces.DeviseDAOInterface;
-import model.Devises;
+import com.BudgetBackers.interfaces.DeviseDAOInterface;
+import com.BudgetBackers.model.Devises;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

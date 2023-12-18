@@ -1,6 +1,6 @@
-package controller;
-import model.Devises;
-import services.DeviseService;
+package com.BudgetBackers.controller;
+import com.BudgetBackers.model.Devises;
+import com.BudgetBackers.services.DeviseService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

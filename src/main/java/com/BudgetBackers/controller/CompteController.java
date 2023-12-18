@@ -1,6 +1,6 @@
-package controller;
-import model.Compte;
-import services.CompteService;
+package com.BudgetBackers.controller;
+import com.BudgetBackers.model.Compte;
+import com.BudgetBackers.services.CompteService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

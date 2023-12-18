@@ -1,8 +1,8 @@
-package services;
+package com.BudgetBackers.services;
 import org.springframework.stereotype.Service;
 
-import model.Devises;
-import repository.DeviseDAO;
+import com.BudgetBackers.model.Devises;
+import com.BudgetBackers.repository.DeviseDAO;
 
 import java.sql.SQLException;
 import java.util.List;
