@@ -26,7 +26,7 @@ public class TransactionsDAO implements TransactionDAOInterface {
     // INSERT INTO TRANSACTIONS
     @Override
     public void insert(Transactions transaction) throws SQLException {
-        String sql = "INSERT INTO transactions (transaction_id, label, montant, date, type, compte_id) VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO transactions (transaction_id, label, montant, temps_du_transaction, type_de_la_transaction, compte_id) VALUES (?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, transaction.getTransactionId());
@@ -56,8 +56,8 @@ public class TransactionsDAO implements TransactionDAOInterface {
                         result.getInt("transaction_id"),
                         result.getString("label"),
                         result.getDouble("montant"),
-                        result.getTimestamp("transaction_date"),
-                        result.getString("transaction_type"),
+                        result.getTimestamp("temps_du_transaction"),
+                        result.getString("type_de_la_transaction"),
                         new Compte(
                                 result.getInt("compte_id"),
                                 result.getString("nom"),
@@ -81,7 +81,7 @@ public class TransactionsDAO implements TransactionDAOInterface {
     // UPDATE TRANSACTIONS
     @Override
     public void update(Transactions transaction) throws SQLException {
-        String sql = "UPDATE transactions SET label = ?, montant = ?, date = ?, Type = ?, compte_id = ? WHERE transaction_id = ?;";
+        String sql = "UPDATE transactions SET label = ?, montant = ?, temps_du_transaction = ?, type_de_la_transaction = ?, compte_id = ? WHERE transaction_id = ?;";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(6, transaction.getTransactionId());
